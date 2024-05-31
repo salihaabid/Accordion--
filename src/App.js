@@ -44,10 +44,15 @@ function Accordion({ data }) {
 
 function Items({ num, title, text, curOpen, onCurOpen }) {
   const isOpen = num === curOpen;
+
   function handleIsOpen() {
-    // setIsOpen((isOpen) => !isOpen);
-    onCurOpen(num);
+    if (isOpen) {
+      onCurOpen(null); // Close the accordion if it's already open
+    } else {
+      onCurOpen(num); // Open the accordion if it's closed
+    }
   }
+
   return (
     <div className={`item ${isOpen ? 'open' : ''}`} onClick={handleIsOpen}>
       <p className='number'>{num < 9 ? `0${num + 1}` : num + 1}</p>
